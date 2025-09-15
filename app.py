@@ -2,6 +2,7 @@
 import time
 from datetime import datetime
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
 APP_TITLE = "🎉 Birthday Countdown & Wish List"
 TARGET_DATE = datetime(2025, 9, 26, 0, 0, 0)
@@ -21,19 +22,20 @@ st.set_page_config(page_title=APP_TITLE, page_icon="🎂", layout="centered")
 st.title(APP_TITLE)
 st.caption("Counting down to September 26, 2025 🎂")
 
-# ----------------------- Countdown -----------------------
-placeholder = st.empty()
+# ----------------------- Auto Refresh -----------------------
+# Refresh every 1000 ms (1 second)
+st_autorefresh(interval=1000, key="countdown_refresh")
 
-# Use Streamlit's rerun approach instead of while True
+# ----------------------- Countdown -----------------------
 days, hours, minutes, seconds = get_countdown(TARGET_DATE)
-with placeholder.container():
-    st.markdown(
-        f"""
-        ## ⏳ Countdown
-        **{days} days, {hours} hours, {minutes} minutes, {seconds} seconds**
-        until the big day! 🎉
-        """
-    )
+
+st.markdown(
+    f"""
+    ## ⏳ Countdown
+    **{days} days, {hours} hours, {minutes} minutes, {seconds} seconds**
+    until the big day! 🎉
+    """
+)
 
 # ----------------------- Wish List -----------------------
 wishlist = {
