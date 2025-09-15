@@ -1,7 +1,6 @@
-# app.py
 from datetime import datetime
 import streamlit as st
-from streamlit import autorefresh as st_autorefresh  # built into Streamlit >=1.25
+from streamlit_autorefresh import st_autorefresh  # this comes from pip package
 
 APP_TITLE = "🎉 Birthday Countdown & Wish List"
 TARGET_DATE = datetime(2025, 9, 26, 0, 0, 0)
@@ -22,7 +21,6 @@ st.title(APP_TITLE)
 st.caption("Counting down to September 26, 2025 🎂")
 
 # ----------------------- Auto Refresh -----------------------
-# Refresh every 1000 ms (1 second)
 st_autorefresh(interval=1000, key="countdown_refresh")
 
 # ----------------------- Countdown -----------------------
